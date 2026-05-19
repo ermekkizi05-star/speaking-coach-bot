@@ -224,17 +224,21 @@ var sel=null, hist=[], msgN=0, busy=false;
 var curSessionId=null, recognition=null, recording=false;
 
 function renderTopics(){
-  var html='';
+  var grid=document.getElementById('topicGrid');
+  grid.innerHTML='';
   for(var i=0;i<TOPICS.length;i++){
     var t=TOPICS[i];
-    html+='<div class="topic-card" id="tc'+t.id+'" onclick="pick(\''+t.id+'\')">'+
-      '<div class="tc-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>'+
+    var d=document.createElement('div');
+    d.className='topic-card';
+    d.id='tc'+t.id;
+    d.setAttribute('data-id',t.id);
+    d.onclick=function(){pick(this.getAttribute('data-id'));};
+    d.innerHTML='<div class="tc-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>'+
       '<span class="tc-emoji">'+t.e+'</span>'+
       '<div class="tc-name">'+t.name+'</div>'+
-      '<div class="tc-level">'+t.lv+'</div>'+
-    '</div>';
+      '<div class="tc-level">'+t.lv+'</div>';
+    grid.appendChild(d);
   }
-  document.getElementById('topicGrid').innerHTML=html;
 }
 
 function pick(id){
