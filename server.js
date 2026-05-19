@@ -11,7 +11,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
  
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ status: "ok", message: "AI Speaking Coach running!" });
 });
  
