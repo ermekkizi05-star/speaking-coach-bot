@@ -477,7 +477,7 @@ app.post("/chat", async (req, res) => {
   try {
     const { messages, system } = req.body;
     const msg = await anthropic.messages.create({
-      model: "claude-3-haiku-20240307",
+      model: "claude-haiku-4-5",
       max_tokens: 800,
       system: system || "You are a helpful English speaking coach.",
       messages: messages,
