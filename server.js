@@ -14,7 +14,7 @@ const HTML = `<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>AI Speaking Coach</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"><\/script>
 <style>
 :root {
   --bg: #f7f9fc; --surface: #ffffff; --surface2: #f0f4f8;
@@ -23,11 +23,7 @@ const HTML = `<!DOCTYPE html>
   --border: rgba(0,0,0,0.08); --radius: 16px; --radius-sm: 10px;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1923; --surface: #1a2535; --surface2: #222f42;
-    --text: #e8f0fa; --text2: #8899b0; --text3: #4a5a6e;
-    --border: rgba(255,255,255,0.07);
-  }
+  :root { --bg: #0f1923; --surface: #1a2535; --surface2: #222f42; --text: #e8f0fa; --text2: #8899b0; --text3: #4a5a6e; --border: rgba(255,255,255,0.07); }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; overflow: hidden; }
@@ -115,10 +111,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: v
 <div class="header">
   <div class="header-row">
     <div class="logo">🎙️</div>
-    <div>
-      <div class="htitle">AI Speaking Coach</div>
-      <div class="hsub">ЖИ негізіндегі ағылшын тілі жаттықтырушысы</div>
-    </div>
+    <div><div class="htitle">AI Speaking Coach</div><div class="hsub">ЖИ негізіндегі ағылшын тілі жаттықтырушысы</div></div>
   </div>
 </div>
 <div class="screens">
@@ -180,56 +173,59 @@ body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: v
 </nav>
 </div>
 <script>
-const tg = window.Telegram?.WebApp;
+var tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
-const TOPICS = [
-  { id:'places', e:'🗺️', name:'Amazing Places', lv:'B1 · Descriptive',
-    sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Amazing Places. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Then add feedback in EXACTLY this format: [FB]F:X|V:X|G:X|GOOD:text|TIP:text[/FB] Where X is score 1-5. Start with: "Hello! I am your AI speaking coach. Let us talk about amazing places! If you could visit any place in the world, where would you go and why?"' },
-  { id:'culture', e:'🌍', name:'Culture Shock', lv:'B1 · Argumentative',
-    sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Culture Shock. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Then add feedback in EXACTLY this format: [FB]F:X|V:X|G:X|GOOD:text|TIP:text[/FB] Where X is score 1-5. Start with: "Hello! Great to see you. Today we talk about culture. Have you ever experienced something from another culture that really surprised you?"' },
-  { id:'cities', e:'🏙️', name:'Cities & Countries', lv:'B1 · Comparative',
-    sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Cities and Countries. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Then add feedback in EXACTLY this format: [FB]F:X|V:X|G:X|GOOD:text|TIP:text[/FB] Where X is score 1-5. Start with: "Hi there! Ready to practice English? Let us compare cities. Which city would you most love to live in and why?"' },
-  { id:'animals', e:'🦁', name:'Animal World', lv:'B1 · Discussion',
-    sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Animal World. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Then add feedback in EXACTLY this format: [FB]F:X|V:X|G:X|GOOD:text|TIP:text[/FB] Where X is score 1-5. Start with: "Hello! Welcome to speaking practice. Today topic is animals! What is your favourite animal and what makes it special?"' },
+var TOPICS = [
+  { id:'places', e:'🗺️', name:'Amazing Places', lv:'B1 · Descriptive', sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Amazing Places. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Add feedback EXACTLY like this: [FB]F:X|V:X|G:X|GOOD:one thing done well|TIP:one improvement[/FB] Scores 1-5. Start with: Hello! I am your AI speaking coach. Lets talk about amazing places! If you could visit any place in the world, where would you go and why?' },
+  { id:'culture', e:'🌍', name:'Culture Shock', lv:'B1 · Argumentative', sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Culture Shock. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Add feedback EXACTLY like this: [FB]F:X|V:X|G:X|GOOD:one thing done well|TIP:one improvement[/FB] Scores 1-5. Start with: Hello! Great to see you. Today we talk about culture. Have you ever experienced something from another culture that surprised you?' },
+  { id:'cities', e:'🏙️', name:'Cities & Countries', lv:'B1 · Comparative', sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Cities and Countries. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Add feedback EXACTLY like this: [FB]F:X|V:X|G:X|GOOD:one thing done well|TIP:one improvement[/FB] Scores 1-5. Start with: Hi there! Ready to practice English? Lets compare cities. Which city would you most love to live in and why?' },
+  { id:'animals', e:'🦁', name:'Animal World', lv:'B1 · Discussion', sys:'You are a warm English speaking coach for Kazakh college students at Pre-Intermediate level. Topic: Animal World. After each student message: 1. Reply naturally and encouragingly (1-2 sentences) 2. Add feedback EXACTLY like this: [FB]F:X|V:X|G:X|GOOD:one thing done well|TIP:one improvement[/FB] Scores 1-5. Start with: Hello! Welcome to speaking practice. Todays topic is animals! What is your favourite animal and what makes it special?' }
 ];
 
-let sel=null, hist=[], msgN=0, busy=false;
-let sessions=JSON.parse(localStorage.getItem('asc3')||'[]');
-let curSess=null, recognition=null, recording=false;
+var sel=null, hist=[], msgN=0, busy=false;
+var sessions=JSON.parse(localStorage.getItem('asc3')||'[]');
+var curSess=null, recognition=null, recording=false;
 
 function renderTopics(){
-  document.getElementById('topicGrid').innerHTML=TOPICS.map(t=>`
-    <div class="topic-card" id="tc${t.id}" onclick="pick('${t.id}')">
-      <div class="tc-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-      <span class="tc-emoji">${t.e}</span>
-      <div class="tc-name">${t.name}</div>
-      <div class="tc-level">${t.lv}</div>
-    </div>`).join('');
+  var html='';
+  for(var i=0;i<TOPICS.length;i++){
+    var t=TOPICS[i];
+    html+='<div class="topic-card" id="tc'+t.id+'" onclick="pick(\''+t.id+'\')">'+
+      '<div class="tc-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>'+
+      '<span class="tc-emoji">'+t.e+'</span>'+
+      '<div class="tc-name">'+t.name+'</div>'+
+      '<div class="tc-level">'+t.lv+'</div>'+
+    '</div>';
+  }
+  document.getElementById('topicGrid').innerHTML=html;
 }
 
 function pick(id){
-  sel=TOPICS.find(t=>t.id===id);
-  document.querySelectorAll('.topic-card').forEach(c=>c.classList.remove('sel'));
+  sel=null;
+  for(var i=0;i<TOPICS.length;i++){ if(TOPICS[i].id===id){sel=TOPICS[i];break;} }
+  var cards=document.querySelectorAll('.topic-card');
+  for(var i=0;i<cards.length;i++){cards[i].classList.remove('sel');}
   document.getElementById('tc'+id).classList.add('sel');
   document.getElementById('startBtn').disabled=false;
 }
 
 function goTab(name,idx){
-  document.querySelectorAll('.screen,.screen-chat').forEach(s=>{s.classList.remove('active');s.style.display='none';});
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const el=document.getElementById('s-'+name);
+  var screens=document.querySelectorAll('.screen,.screen-chat');
+  for(var i=0;i<screens.length;i++){screens[i].classList.remove('active');screens[i].style.display='none';}
+  var btns=document.querySelectorAll('.nav-btn');
+  for(var i=0;i<btns.length;i++){btns[i].classList.remove('active');}
+  var el=document.getElementById('s-'+name);
   el.style.display=name==='chat'?'flex':'block';
   el.classList.add('active');
-  document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  btns[idx].classList.add('active');
   if(name==='stats')renderStats();
 }
 
 function scrollBottom(){
-  const wrap=document.getElementById('chatMsgs');
-  setTimeout(()=>{ wrap.scrollTop=wrap.scrollHeight; },100);
-  setTimeout(()=>{ wrap.scrollTop=wrap.scrollHeight; },300);
-  setTimeout(()=>{ wrap.scrollTop=wrap.scrollHeight; },600);
+  var wrap=document.getElementById('chatMsgs');
+  setTimeout(function(){wrap.scrollTop=wrap.scrollHeight;},100);
+  setTimeout(function(){wrap.scrollTop=wrap.scrollHeight;},400);
 }
 
 function startChat(){
@@ -245,65 +241,75 @@ function startChat(){
   callAI([{role:'user',content:'Hello, please start our speaking session.'}]);
 }
 
-async function callAI(msgs){
+function callAI(msgs){
   busy=true;
   document.getElementById('sendBtn').disabled=true;
   showDots();
-  try{
-    const res=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sel.sys,messages:msgs})});
-    const d=await res.json();
-    const txt=d.content?.map(b=>b.text||'').join('')||'Great answer! Keep going!';
+  var limited=msgs.slice(-10);
+  fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sel.sys,messages:limited})})
+  .then(function(res){return res.json();})
+  .then(function(d){
+    var txt=(d.content&&d.content[0]&&d.content[0].text)||'Great answer! Keep going!';
     hideDots();
-    const p=parseFB(txt);
+    var p=parseFB(txt);
     addBubble('ai',p.text,p.fb);
     hist.push({role:'assistant',content:txt});
     if(p.fb&&curSess)curSess.scores.push((p.fb.f+p.fb.v+p.fb.g)/3);
-  }catch(e){
+    busy=false;
+    document.getElementById('sendBtn').disabled=document.getElementById('userInput').value.trim().length===0;
+  })
+  .catch(function(){
     hideDots();
-    addBubble('ai',"Let's start! Tell me something in English.");
-  }
-  busy=false;
-  document.getElementById('sendBtn').disabled=document.getElementById('userInput').value.trim().length===0;
+    addBubble('ai',"Let us start! Tell me something in English.");
+    busy=false;
+    document.getElementById('sendBtn').disabled=false;
+  });
 }
 
 function parseFB(txt){
-  const m=txt.match(/\[FB\](.*?)\[\/FB\]/s);
+  var m=txt.match(/\[FB\]([\s\S]*?)\[\/FB\]/);
   if(!m)return{text:txt,fb:null};
-  const clean=txt.replace(/\[FB\].*?\[\/FB\]/s,'').trim();
-  const b=m[1];
-  const g=re=>{const x=b.match(re);return x?x[1].trim():'';};
-  return{text:clean,fb:{f:parseInt(g(/F:(\d)/))||3,v:parseInt(g(/V:(\d)/))||3,g:parseInt(g(/G:(\d)/))||3,good:g(/GOOD:([^|]+)/),tip:g(/TIP:([^|]+)/)}};
+  var clean=txt.replace(/\[FB\][\s\S]*?\[\/FB\]/,'').trim();
+  var b=m[1];
+  function g(re){var x=b.match(re);return x?x[1].trim():'';}
+  return{text:clean,fb:{
+    f:parseInt(g(/F:(\d)/))||3,
+    v:parseInt(g(/V:(\d)/))||3,
+    g:parseInt(g(/G:(\d)/))||3,
+    good:g(/GOOD:([^|]+)/),
+    tip:g(/TIP:([^|]+)/)
+  }};
 }
 
 function addBubble(role,text,fb){
-  const wrap=document.getElementById('chatMsgs');
-  const d=document.createElement('div');
+  var wrap=document.getElementById('chatMsgs');
+  var d=document.createElement('div');
   d.className='msg msg-'+(role==='ai'?'ai':'user');
-  const av=role==='ai'?'<div class="av av-ai">AI</div>':'<div class="av av-me">СЕН</div>';
-  const bc=role==='ai'?'b-ai':'b-me';
-  let fbH='';
+  var av=role==='ai'?'<div class="av av-ai">AI</div>':'<div class="av av-me">СЕН</div>';
+  var bc=role==='ai'?'b-ai':'b-me';
+  var fbH='';
   if(fb){
-    fbH=`<div class="fb-card">
-      <div class="fb-head">📊 Бағалау</div>
-      <div class="fb-pills">
-        <span class="fb-pill">Fluency ${fb.f}/5</span>
-        <span class="fb-pill">Vocab ${fb.v}/5</span>
-        <span class="fb-pill">Grammar ${fb.g}/5</span>
-      </div>
-      ${fb.good?`<div class="fb-row">✅ <strong>Жақсы:</strong> ${fb.good}</div>`:''}
-      ${fb.tip?`<div class="fb-row">💡 <strong>Кеңес:</strong> ${fb.tip}</div>`:''}
-    </div>`;
+    fbH='<div class="fb-card">'+
+      '<div class="fb-head">📊 Бағалау</div>'+
+      '<div class="fb-pills">'+
+        '<span class="fb-pill">Fluency '+fb.f+'/5</span>'+
+        '<span class="fb-pill">Vocab '+fb.v+'/5</span>'+
+        '<span class="fb-pill">Grammar '+fb.g+'/5</span>'+
+      '</div>'+
+      (fb.good?'<div class="fb-row">✅ <strong>Жақсы:</strong> '+fb.good+'</div>':'')+
+      (fb.tip?'<div class="fb-row">💡 <strong>Кеңес:</strong> '+fb.tip+'</div>':'')+
+    '</div>';
   }
   d.innerHTML=role==='ai'
-    ?`${av}<div><div class="bubble ${bc}">${text.replace(/\n/g,'<br>')}</div>${fbH}</div>`
-    :`${av}<div><div class="bubble ${bc}">${text.replace(/\n/g,'<br>')}</div></div>`;
+    ?av+'<div><div class="bubble '+bc+'">'+text.replace(/\n/g,'<br>')+'</div>'+fbH+'</div>'
+    :av+'<div><div class="bubble '+bc+'">'+text.replace(/\n/g,'<br>')+'</div></div>';
   wrap.appendChild(d);
   scrollBottom();
 }
 
-let dotEl=null;
+var dotEl=null;
 function showDots(){
-  const w=document.getElementById('chatMsgs');
+  var w=document.getElementById('chatMsgs');
   dotEl=document.createElement('div');
   dotEl.className='msg msg-ai';
   dotEl.innerHTML='<div class="av av-ai">AI</div><div class="bubble b-ai"><div class="dots-wrap"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
@@ -313,8 +319,8 @@ function showDots(){
 function hideDots(){if(dotEl){dotEl.remove();dotEl=null;}}
 
 function doSend(){
-  const inp=document.getElementById('userInput');
-  const t=inp.value.trim();
+  var inp=document.getElementById('userInput');
+  var t=inp.value.trim();
   if(!t||busy)return;
   inp.value=''; inp.style.height='';
   document.getElementById('sendBtn').disabled=true;
@@ -327,7 +333,7 @@ function doSend(){
 
 function saveSess(){
   if(!curSess||curSess.msgs===0)return;
-  if(!sessions.includes(curSess))sessions.unshift(curSess);
+  if(sessions.indexOf(curSess)===-1)sessions.unshift(curSess);
   if(sessions.length>20)sessions.pop();
   localStorage.setItem('asc3',JSON.stringify(sessions));
 }
@@ -345,54 +351,69 @@ function toggleMic(){
     return;
   }
   if(recording){recognition.stop();return;}
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   recognition=new SR();
   recognition.lang='en-US';
   recognition.interimResults=false;
-  const btn=document.getElementById('micBtn');
+  var btn=document.getElementById('micBtn');
   recording=true;
   btn.classList.add('recording');
   btn.innerHTML='<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg> Тыңдап жатыр...';
-  recognition.onresult=e=>{
-    const t=e.results[0][0].transcript;
+  recognition.onresult=function(e){
+    var t=e.results[0][0].transcript;
     document.getElementById('userInput').value=t;
     autoH(document.getElementById('userInput'));
   };
-  const resetMic=()=>{
+  function resetMic(){
     recording=false;
     btn.classList.remove('recording');
     btn.innerHTML='<svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0014 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg> Дауыспен жазу';
-  };
-  recognition.onend=()=>{resetMic();const t=document.getElementById('userInput').value.trim();if(t)doSend();};
-  recognition.onerror=()=>{resetMic();};
+  }
+  recognition.onend=function(){resetMic();var t=document.getElementById('userInput').value.trim();if(t)doSend();};
+  recognition.onerror=function(){resetMic();};
   recognition.start();
 }
 
 function renderStats(){
   document.getElementById('stTotal').textContent=sessions.length;
-  const all=sessions.flatMap(s=>s.scores);
-  document.getElementById('stAvg').textContent=all.length?(all.reduce((a,b)=>a+b,0)/all.length).toFixed(1):'—';
-  document.getElementById('stMsgs').textContent=sessions.reduce((a,s)=>a+(s.msgs||0),0);
-  const ts={};
-  sessions.forEach(s=>{if(!ts[s.topic])ts[s.topic]=[];ts[s.topic].push(...s.scores);});
-  let best='—',ba=0;
-  Object.entries(ts).forEach(([t,sc])=>{if(!sc.length)return;const a=sc.reduce((x,y)=>x+y,0)/sc.length;if(a>ba){ba=a;best=t.split(' ')[0];}});
+  var all=[];
+  for(var i=0;i<sessions.length;i++){for(var j=0;j<sessions[i].scores.length;j++){all.push(sessions[i].scores[j]);}}
+  document.getElementById('stAvg').textContent=all.length?(all.reduce(function(a,b){return a+b;},0)/all.length).toFixed(1):'—';
+  var totalMsgs=0;
+  for(var i=0;i<sessions.length;i++){totalMsgs+=(sessions[i].msgs||0);}
+  document.getElementById('stMsgs').textContent=totalMsgs;
+  var ts={};
+  for(var i=0;i<sessions.length;i++){
+    var s=sessions[i];
+    if(!ts[s.topic])ts[s.topic]=[];
+    for(var j=0;j<s.scores.length;j++){ts[s.topic].push(s.scores[j]);}
+  }
+  var best='—',ba=0;
+  for(var t in ts){
+    if(!ts[t].length)continue;
+    var a=ts[t].reduce(function(x,y){return x+y;},0)/ts[t].length;
+    if(a>ba){ba=a;best=t.split(' ')[0];}
+  }
   document.getElementById('stBest').textContent=best;
-  const list=document.getElementById('histList');
+  var list=document.getElementById('histList');
   if(!sessions.length){list.innerHTML='<div class="empty"><div class="empty-icon">📭</div><p>Әлі сессия жоқ.</p></div>';return;}
-  list.innerHTML=sessions.slice(0,10).map(s=>{
-    const avg=s.scores.length?(s.scores.reduce((a,b)=>a+b,0)/s.scores.length).toFixed(1):'—';
-    const pct=avg!=='—'?(avg/5*100).toFixed(0):0;
-    return`<div class="hcard">
-      <div class="hcard-top"><span class="hcard-name">${s.e||''} ${s.topic}</span><span class="hcard-score">${avg}/5</span></div>
-      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%"></div></div>
-      <div class="hcard-meta">${s.date||''} · ${s.msgs||0} хабарлама</div>
-    </div>`;
-  }).join('');
+  var html='';
+  var shown=sessions.slice(0,10);
+  for(var i=0;i<shown.length;i++){
+    var s=shown[i];
+    var avg=s.scores.length?(s.scores.reduce(function(a,b){return a+b;},0)/s.scores.length).toFixed(1):'—';
+    var pct=avg!=='—'?(avg/5*100).toFixed(0):0;
+    html+='<div class="hcard">'+
+      '<div class="hcard-top"><span class="hcard-name">'+(s.e||'')+' '+s.topic+'</span><span class="hcard-score">'+avg+'/5</span></div>'+
+      '<div class="prog-bg"><div class="prog-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="hcard-meta">'+(s.date||'')+' · '+(s.msgs||0)+' хабарлама</div>'+
+    '</div>';
+  }
+  list.innerHTML=html;
 }
 
 renderTopics();
-</script>
+<\/script>
 </body>
 </html>`;
 
@@ -405,11 +426,12 @@ app.post("/chat", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   try {
     const { messages, system } = req.body;
+    const limited = messages.slice(-10);
     const msg = await anthropic.messages.create({
       model: "claude-haiku-4-5",
       max_tokens: 800,
       system: system || "You are a helpful English speaking coach.",
-      messages: messages,
+      messages: limited,
     });
     res.json({ content: [{ text: msg.content[0].text }] });
   } catch (error) {
@@ -422,4 +444,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log("Server running on port " + PORT);
 });
- 
