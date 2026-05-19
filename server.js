@@ -79,7 +79,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-se
 .ct-name { font-size: 13px; font-weight: 700; }
 .ct-count { font-size: 11px; color: var(--text2); background: var(--surface2); padding: 2px 9px; border-radius: 20px; }
  
-.chat-msgs { flex: 1; overflow-y: auto; margin-bottom: 10px; }
+.chat-msgs { flex: 1; overflow-y: auto; margin-bottom: 10px; scroll-behavior: smooth; }
 .msg { display: flex; gap: 7px; margin-bottom: 12px; }
 .msg-user { flex-direction: row-reverse; }
 .av { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
@@ -362,9 +362,11 @@ function addBubble(role,text,fb){
     :\`\${av}<div><div class="bubble \${bc}">\${text.replace(/\\n/g,'<br>')}</div></div>\`;
   wrap.appendChild(d);
   setTimeout(() => {
-  wrap.scrollTop = wrap.scrollHeight;
-  wrap.scrollTo({ top: wrap.scrollHeight, behavior: 'smooth' });
-}, 100);
+    wrap.scrollTop = wrap.scrollHeight;
+    wrap.scrollTo({ top: wrap.scrollHeight, behavior: 'smooth' });
+    const chatScreen = document.getElementById('s-chat');
+    chatScreen.scrollTop = chatScreen.scrollHeight;
+  }, 150);
 }
  
 let dotEl=null;
