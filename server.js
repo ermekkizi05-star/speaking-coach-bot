@@ -361,7 +361,10 @@ function addBubble(role,text,fb){
     ?\`\${av}<div><div class="bubble \${bc}">\${text.replace(/\\n/g,'<br>')}</div>\${fbH}</div>\`
     :\`\${av}<div><div class="bubble \${bc}">\${text.replace(/\\n/g,'<br>')}</div></div>\`;
   wrap.appendChild(d);
-  wrap.scrollTop=wrap.scrollHeight;
+  setTimeout(() => {
+  wrap.scrollTop = wrap.scrollHeight;
+  wrap.scrollTo({ top: wrap.scrollHeight, behavior: 'smooth' });
+}, 100);
 }
  
 let dotEl=null;
